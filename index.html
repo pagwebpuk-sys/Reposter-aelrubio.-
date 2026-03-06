@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repostería El Rubio</title>
+    <!-- Fuente estilo One Piece / Cómic -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --one-piece-yellow: #DAA520; /* Amarillo oscuro como pediste */
+            --one-piece-black: #1a1a1a;
+            --one-piece-red: #D32F2F;
+            --paper-bg: #f4e4bc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--paper-bg);
+            background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');
+            color: var(--one-piece-black);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .comic-text {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- ENTRADA ÉPICA --- */
+        #epic-entrance {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--one-piece-yellow);
+            transition: opacity 1s ease-out;
+        }
+
+        #epic-entrance h1 {
+            font-size: 4rem;
+            text-shadow: 4px 4px 0px var(--one-piece-red);
+            animation: pulse 1s infinite alternate;
+        }
+
+        #enter-btn {
+            margin-top: 20px;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            background: var(--one-piece-red);
+            color: white;
+            border: 3px solid var(--one-piece-yellow);
+            font-family: 'Bangers', cursive;
+            cursor: pointer;
+            box-shadow: 5px 5px 0px white;
+            transition: transform 0.2s;
+        }
+
+        #enter-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        /* --- MARCOS ESTILO ONE PIECE --- */
+        .manga-panel {
+            border: 4px solid var(--one-piece-black);
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            position: relative;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+        }
+
+        .manga-panel::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 2px solid var(--one-piece-yellow);
+            pointer-events: none;
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--one-piece-black);
+            color: var(--one-piece-yellow);
+            border-bottom: 5px solid var(--one-piece-yellow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .circuit-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--one-piece-yellow);
+            object-fit: cover;
+            background-color: white;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .circuit-left {
+            left: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .circuit-right {
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            text-shadow: 3px 3px 0px var(--one-piece-red);
+            z-index: 1;
+            margin: 0;
+        }
+
+        /* --- SECCIONES --- */
+        .section-title {
+            background: var(--one-piece-yellow);
+            color: var(--one-piece-black);
+            display: inline-block;
+            padding: 5px 15px;
+            transform: rotate(-2deg);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            border: 2px solid black;
+        }
+
+        .content-list {
+            list-style: none;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .content-list li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .content-list li::before {
+            content: '🍖';
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .content-img {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            object-fit: cover;
+            border: 3px solid black;
+            margin: 15px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- UBICACIÓN Y HORARIOS --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .circuit-left, .circuit-right { width: 80px; height: 80px; }
+            .main-title { font-size: 2rem; }
+        }
+
+        .map-btn {
+            display: inline-block;
+            background: var(--one-piece-red);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            border: 2px solid white;
+            margin-top: 10px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--one-piece-black);
+            color: var(--one-piece-yellow);
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+            border: 2px solid var(--one-piece-yellow);
+        }
+
+        .whatsapp { background-color: #25D366; }
+        .instagram { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
+        .tiktok { background-color: #000000; }
+
+        .social-btn:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENTRADA ÉPICA -->
+    <div id="epic-entrance">
+        <h1>¡ONE PIECE!</h1>
+        <h2>Repostería El Rubio</h2>
+        <button id="enter-btn">¡ENTRAR A LA AVENTURA!</button>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <img src="IMG-20260304-WA0002.jpg" alt="Circuito 1" class="circuit-img circuit-left">
+            <h1 class="main-title">Repostería El Rubio</h1>
+            <img src="IMG-20260304-WA0002.jpg" alt="Circuito 2" class="circuit-img circuit-right">
+        </div>
+    </header>
+
+    <!-- SECCIÓN DE PASTELES -->
+    <section class="manga-panel">
+        <h2 class="section-title">🎂 Pasteles para Todas las Ocasiones</h2>
+        <p>Hacemos pasteles para todas las ocasiones ya:</p>
+        <ul class="content-list">
+            <li>Cumpleaños 🎂</li>
+            <li>Boda 💍</li>
+            <li>Bautizo 👶</li>
+            <li>Baby Shower 🍼</li>
+            <li>Revelación de Sexo 🎀</li>
+            <li>Y mucho más...</li>
+        </ul>
+        <img src="https://placehold.co/500x300/DAA520/000000?text=Imagen+de+Pasteles" alt="Pasteles" class="content-img">
+    </section>
+
+    <!-- SECCIÓN DE PORCIONES -->
+    <section class="manga-panel">
+        <h2 class="section-title">🍰 Porciones de Bizcocho</h2>
+        <p>Porciones de bizcocho de:</p>
+        <ul class="content-list">
+            <li>Dulce de leche 🍮</li>
+            <li>Piña 🍍</li>
+            <li>Guayaba 🍈</li>
+            <li>Fresa 🍓</li>
+            <li>Tres leches 🥛</li>
+            <li>Vaso de crema batida con fresa 🍦</li>
+        </ul>
+        <img src="https://placehold.co/500x300/DAA520/000000?text=Imagen+de+Porciones" alt="Porciones" class="content-img">
+    </section>
+
+    <!-- SECCIÓN DE GELATINAS -->
+    <section class="manga-panel">
+        <h2 class="section-title">🍮 Vendemos Gelatinas</h2>
+        <p>Además tenemos:</p>
+        <ul class="content-list">
+            <li>Gelatinas 🍮</li>
+            <li>Helados caseros 🍦</li>
+        </ul>
+        <img src="https://placehold.co/500x300/DAA520/000000?text=Imagen+de+Gelatinas" alt="Gelatinas" class="content-img">
+    </section>
+
+    <!-- UBICACIÓN Y HORARIOS -->
+    <section class="manga-panel">
+        <div class="info-grid">
+            <div>
+                <h2 class="section-title">📍 Ubicación</h2>
+                <p><strong>Repostería El Rubio</strong></p>
+                <p>La Doble Vía, Guayubin 62200</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Repostería+El+Rubio+Guayubin+62200" target="_blank" class="map-btn">
+                    <i class="fas fa-map-marker-alt"></i> Ver en Google Maps
+                </a>
+            </div>
+            <div>
+                <h2 class="section-title">⏰ Horarios</h2>
+                <ul class="content-list">
+                    <li><strong>Lunes:</strong> Cerrado</li>
+                    <li><strong>Martes a Domingo:</strong></li>
+                    <li>9:00 am - 6:00 pm</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <h2>¡Contáctanos!</h2>
+        <p>📞 Teléfono: 829-772-5286</p>
+        <div class="social-buttons">
+            <a href="https://wa.me/18297725286" target="_blank" class="social-btn whatsapp" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://instagram.com/repostería+el+rubio" target="_blank" class="social-btn instagram" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://tiktok.com/@repostería+el+rubio" target="_blank" class="social-btn tiktok" title="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.8rem;">© 2024 Repostería El Rubio - ¡El Tesoro Más Dulce!</p>
+    </footer>
+
+    <!-- SCRIPT PARA LA ENTRADA ÉPICA -->
+    <script>
+        document.getElementById('enter-btn').addEventListener('click', function() {
+            const entrance = document.getElementById('epic-entrance');
+            entrance.style.opacity = '0';
+            setTimeout(function() {
+                entrance.style.display = 'none';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
